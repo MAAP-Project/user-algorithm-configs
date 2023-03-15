@@ -1,0 +1,113 @@
+###############################################################################                  
+#
+# Algorithm Configuration Template
+#
+# This file describes an algorithm. The data from this file are used to
+# register a PGE to the MAAP.
+#
+###############################################################################
+
+
+###############################################################################
+# Algorithm Name
+#
+# This is a string that will be used to build the algorithm identifier within
+# the MAAP. The identifier will be defined as algorithm_name:algorithm_version.
+algorithm_name: hello-world
+
+
+###############################################################################
+# Algorithm Version
+#
+# The algorithm version is equivalent to the code repository's branch. This is
+# a string that will be used to build the algorithm identifier within the
+# MAAP. The identifier will be defined as algorithm_name:algorithm_version.
+#
+# Note: 
+# if an algorithm with a given name and version is already registered,
+# reregistering will override the existing registered algorithm. For example,
+# if algorithm hello-world:main is already a registerd algorithm,
+# reregistering it will override the existing hello-world:main. However, if the
+# user registers algorithm hello-world:develop, a new algorithm will be
+# registered and both hello-world:main and hello-world:develop will be
+# available for execution.
+algorithm_version: main
+
+
+############################################################################### 
+# Repository URL
+#
+# This is the URL to the public repository where the algorithm code resides.
+repository_url: https://gitlab.com/hello-world.git
+
+
+############################################################################### 
+# Docker Container URL
+#
+# This is the URL to the docker container to use for algorithm execution.
+#
+# Note:
+# Each docker container available on MAAP supports a different suite of
+# packages. To view a list of available containers and their packages see TBD.
+docker_container_url: mas.dit.maap-project.org/root/maap-workspaces/base_images/vanilla:dit
+
+
+############################################################################### 
+# Algorithm Description
+#
+# Brief description of the algorithm.
+algorithm_description: The hello-world algorithm tests basic MAAP functionality.
+
+
+############################################################################### 
+# Build Command
+#
+# This is the path to the build file within the algorithm code repository. The
+# path is relative to the root of the repository.
+#
+# The build file is typically used to perform any additional setup required for
+# for algorithm execution, such as installing packages that are not available
+# in the selected docker container. 
+build_command: hello-world/install.sh
+
+
+############################################################################### 
+# Run Command
+#
+# This is the path to the run file within the algorithm code repository. The
+# path is relative to the root of the repository.
+#
+# The run file is the file the container will execute. It contains the commands
+# to run the algorithm.
+run_command: hello-world/run.sh
+
+
+############################################################################### 
+# Disk Space
+#
+# This is the approximate disk space to allocate within the worker for
+# algorithm execution.
+#
+# Disk space may be allocated in units of GB, MB, or KB. The maximum allowable
+# is 90GB.
+disk_space: 10GB
+
+
+############################################################################### 
+# Inputs
+#
+# These are the inputs to the algorithm. If the algorithm has no inputs, remove
+# everything below the inputs key.
+#
+# There are three input types: file, config, and positional.
+# 
+# TODO: describe types and options
+inputs:
+# Remove everything below this line if there are no inputs
+  file:
+    - name: s3_dataset
+      required: True
+  config:
+    - name: n_cores
+      default: "1"
+

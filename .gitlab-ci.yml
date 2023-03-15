@@ -1,0 +1,14 @@
+build_image:
+  stage: build
+
+  before_script:
+  - docker info
+
+  script:
+    - docker login -u gitlab-ci-token -p "$CI_JOB_TOKEN" "$CI_REGISTRY"
+    - echo "$S3_CODE_BUCKET" "$MOZART_REST_URL" "$GRQ_REST_URL"
+    - ./build.sh
+
+  only:
+   - main
+

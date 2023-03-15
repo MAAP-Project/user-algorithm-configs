@@ -1,2 +1,2 @@
 # user-algorithm-configs
-Template files for user algorithm configuration repos.
+This repository holds the template files that are copied to the user repositories used to store the algorithm configurations files of registered algorithms.
