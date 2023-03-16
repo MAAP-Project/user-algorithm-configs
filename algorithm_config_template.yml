@@ -97,17 +97,57 @@ disk_space: 10GB
 # Inputs
 #
 # These are the inputs to the algorithm. If the algorithm has no inputs, remove
-# everything below the inputs key.
+# everything below the 'inputs' key. If, for example, an algorithm has no file
+# inputs, the 'file' key can be removed.
 #
-# There are three input types: file, config, and positional.
+# There are three input types: positional, file, and config:
 # 
-# TODO: describe types and options
+#    * positional
+#      Inputs defined here will be used as inputs to the run command defined as
+#      run_command. The order in which the inputs are defined will be preserved
+#      when building the run_command. It is recommended that positional inputs 
+#      be used when users wish to change the behavior of the run command
+#      and not the behavior of the algorithm e.g. adding a verbose flag.
+#
+#    * file
+#      Inputs defined here will be downloaded and placed in a directory named
+#      'inputs'.
+#
+#    * config
+#      Inputs defined here will be written to a json file named 'inputs.json' in 
+#      the working directory. It is recommended that config inputs be used to
+#      change the behavior of the algorithm the user runs.
+#
+#
+# The 'config' and 'positional' input types support the 'data_type' field, which
+# defines an input's data type. The supported data types are: boolean, string, 
+# number, and object (array or dictionary). For positional input types, this
+# field will be used as metadata only; all positional input types will be
+# interpreted as strings when building the run command. File input types are
+# treated as strings.
+#
+# All inputs defined will be used. If a defined input is not provided, its
+# default value will be used. If it has no default value, that input must be
+# provided. Users who may want to omit inputs defined under the config
+# input type must handle that within their algorithms.
 inputs:
 # Remove everything below this line if there are no inputs
+  positional:
+    - name: verbose
+      description:
+      default: 
+      data_type:
   file:
-    - name: s3_dataset
-      required: True
+    - name: my_s3_file
+      description: 
+      default:
   config:
-    - name: n_cores
-      default: "1"
-
+    - name: minVal
+      description: Minimum value
+      default: 0
+      data_type: number
+      
+    - name: maxVal
+      description: Maximum value
+      default: 10
+      data_type: number
